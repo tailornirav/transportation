@@ -23,11 +23,11 @@
             <div id="viewvisitingcardcarousel" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner" id="viewvisitingcardcarouselinner">
               </div>
-              <a class="carousel-control-prev" href="#visitingcardcarousel" role="button" data-slide="prev">
+              <a class="carousel-control-prev" href="#viewvisitingcardcarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
               </a>
-              <a class="carousel-control-next" href="#visitingcardcarousel" role="button" data-slide="next">
+              <a class="carousel-control-next" href="#viewvisitingcardcarousel" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
               </a>
@@ -107,7 +107,7 @@
               </tr>
             </thead>
             <tbody>
-              @for ($i = 1; $i <= 5; $i++)
+              @for ($i = 1; $i <= 4; $i++)
               <tr><td id="viewname{{$i}}"></td><td id="viewmobile1{{$i}}"></td><td id="viewmobile2{{$i}}"></td><td id="viewwhatsapp{{$i}}"></td></tr>
               @endfor
             </tbody>
@@ -134,7 +134,7 @@
               </tr>
             </thead>
             <tbody>
-              @for ($i = 1; $i <= 5; $i++)
+              @for ($i = 1; $i <= 3; $i++)
               <tr><td id="holdername{{$i}}"></td><td id="accountnumber{{$i}}"></td><td id="bankname{{$i}}"></td><td id="bankbranch{{$i}}"></td><td id="ifsccode{{$i}}"></td></tr>
               @endfor
             </tbody>

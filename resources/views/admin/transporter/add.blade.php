@@ -23,9 +23,9 @@
     <div class="col-auto d-none d-sm-block"><h3>Add Transporter</h3></div>
     <div class="col-auto ml-auto text-right mt-n1">
       <input type="hidden" id="transporterid" value="">
-      <button id="addtransportertodatabase" class="btn btn-primary shadow-sm">
-        <i class="align-middle" data-feather="file-plus"></i>
-        Save Transporter
+      <button id="viewtransporter" class="btn btn-primary shadow-sm">
+        <i class="align-middle" data-feather="eye"></i>
+        View Transporter
       </button>
     </div>
     <div class="col-md-12 mt-4">
@@ -145,6 +145,10 @@
                 </div>
               </div>
             </div>
+            <button id="savetransporter" class="btn btn-primary shadow-sm">
+              <i class="align-middle" data-feather="file-plus"></i>
+              Save Transporter
+            </button>
           </div>
         </div>
         <div id="addtransporterwizard" class="wizard wizard-primary mb-4">
@@ -155,39 +159,36 @@
           </ul>
           <div class="tab-content" style="overflow:visible">
             <div id="contact" class="tab-pane" role="tabpanel">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <h3>Add More contacts</h3>
-                  <div class="form-group">
-                    <div class="form-row">
-                      <div class="form-group col-md-3">
-                        <label for="multiplename">Name of the Person</label>
-                        @for ($i = 1; $i <= 5; $i++)
-                        <input type="text" class="form-control" id="multiplename{{$i}}" placeholder="Name">
-                        @endfor
-                      </div>
-                      <div class="form-group col-md-3">
-                        <label for="multiplecontact">Contact Number 1</label>
-                        @for ($i = 1; $i <= 5; $i++)
-                        <input type="tel" class="form-control" id="multiplecontact1{{$i}}" placeholder="Mobile" pattern="[6-9]{1}[0-9]{9}">
-                        @endfor
-                      </div>
-                      <div class="form-group col-md-3">
-                        <label for="multiplecontact">Contact Number 2</label>
-                        @for ($i = 1; $i <= 5; $i++)
-                        <input type="tel" class="form-control" id="multiplecontact2{{$i}}" placeholder="Mobile" pattern="[6-9]{1}[0-9]{9}">
-                        @endfor
-                      </div>
-                      <div class="form-group col-md-3">
-                        <label for="multiplewhatsapp">What's App Mobile Number</label>
-                        @for ($i = 1; $i <= 5; $i++)
-                        <input type="tel" class="form-control" id="multiplewhatsappmobile{{$i}}" placeholder="What's App" pattern="[6-9]{1}[0-9]{9}">
-                        @endfor
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label for="multiplename">Name of the Person</label>
+                  @for ($i = 1; $i <= 4; $i++)
+                  <input type="text" class="form-control" id="multiplename{{$i}}" placeholder="Name">
+                  @endfor
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="multiplecontact">Contact Number 1</label>
+                  @for ($i = 1; $i <= 4; $i++)
+                  <input type="tel" class="form-control" id="multiplecontact1{{$i}}" placeholder="Mobile" pattern="[6-9]{1}[0-9]{9}">
+                  @endfor
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="multiplecontact">Contact Number 2</label>
+                  @for ($i = 1; $i <= 4; $i++)
+                  <input type="tel" class="form-control" id="multiplecontact2{{$i}}" placeholder="Mobile" pattern="[6-9]{1}[0-9]{9}">
+                  @endfor
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="multiplewhatsapp">What's App Mobile Number</label>
+                  @for ($i = 1; $i <= 4; $i++)
+                  <input type="tel" class="form-control" id="multiplewhatsappmobile{{$i}}" placeholder="What's App" pattern="[6-9]{1}[0-9]{9}">
+                  @endfor
+                </div>
+              </div>
+              <button id="savecontacts" class="btn btn-primary shadow-sm">
+                <i class="align-middle" data-feather="file-plus"></i>
+                Save Contacts
+              </button>
             </div>
             <div id="service" class="tab-pane" role="tabpanel">
               <div class="form-row">
@@ -228,40 +229,48 @@
                   @endfor
                 </div>
               </div>
+              <button id="saveservices" class="btn btn-primary shadow-sm">
+                <i class="align-middle" data-feather="file-plus"></i>
+                Save Services
+              </button>
             </div>
             <div id="bank" class="tab-pane" role="tabpanel">
               <div class="form-row">
                 <div class="form-group col-md-3">
                   <label for="bankholdername">Account Holder Name</label>
-                  @for ($i = 1; $i <= 5; $i++)
+                  @for ($i = 1; $i <= 3; $i++)
                   <input type="text" class="form-control" id="bankholdername{{$i}}" placeholder="Holder Name">
                   @endfor
                 </div>
                 <div class="form-group col-md-3">
                   <label for="accountnumber">Account Number</label>
-                  @for ($i = 1; $i <= 5; $i++)
+                  @for ($i = 1; $i <= 3; $i++)
                   <input type="text" class="form-control" id="accountnumber{{$i}}" placeholder="Account Number">
                   @endfor
                 </div>
                 <div class="form-group col-md-2">
                   <label for="bankname">Bank Name</label>
-                  @for ($i = 1; $i <= 5; $i++)
+                  @for ($i = 1; $i <= 3; $i++)
                   <input type="text" class="form-control" id="bankname{{$i}}" placeholder="Name">
                   @endfor
                 </div>
                 <div class="form-group col-md-2">
                   <label for="bankbranch">Bank's Branch</label>
-                  @for ($i = 1; $i <= 5; $i++)
+                  @for ($i = 1; $i <= 3; $i++)
                   <input type="text" class="form-control" id="bankbranch{{$i}}" placeholder="Branch">
                   @endfor
                 </div>
                 <div class="form-group col-md-2">
                   <label for="ifsccode">IFSC Code</label>
-                  @for ($i = 1; $i <= 5; $i++)
+                  @for ($i = 1; $i <= 3; $i++)
                   <input type="text" class="form-control" id="ifsccode{{$i}}" placeholder="IFSC">
                   @endfor
                 </div>
               </div>
+              <button id="savebanks" class="btn btn-primary shadow-sm">
+                <i class="align-middle" data-feather="file-plus"></i>
+                Save Banks
+              </button>
             </div>
           </div>
         </div>
