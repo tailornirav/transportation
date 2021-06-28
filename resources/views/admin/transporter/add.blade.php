@@ -27,6 +27,10 @@
         <i class="align-middle" data-feather="eye"></i>
         View Transporter
       </button>
+      <button id="savetransporter" class="btn btn-primary shadow-sm">
+        <i class="align-middle" data-feather="file-plus"></i>
+        Save Transporter
+      </button>
     </div>
     <div class="col-md-12 mt-4">
       <div class="tab-content">
@@ -36,6 +40,26 @@
           </div>
           <div class="card-body">
             <div class="row">
+              <div class="col-md-4">
+                <div class="text-center">
+                  <label for="visitingcard"><b>Visiting Card</b></label>
+                    <div id="visitingcardcarousel" class="carousel slide" data-ride="carousel">
+                      <div class="carousel-inner" id="visitingcardcarouselinner">
+                      </div>
+                      <a class="carousel-control-prev" href="#visitingcardcarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#visitingcardcarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </div>
+                  <input id="visitingcard" class="btn btn-primary instantview" type="file" multiple />
+                  <input type="hidden" id="visitingcardid" value="" />
+                  <input type="hidden" id="visitingcardstring" value="" />
+                </div>
+              </div>
               <div class="col-md-8">
                 <div class="form-row">
                   <div class="form-group col-md-4">
@@ -48,7 +72,7 @@
                   </div>
                   <div class="form-group col-md-4">
                     <label for="inputArea">Area</label>
-                    <input type="text" id="basicarea" class="form-control" />
+                    <select id="basicarea" class="form-control selectarea" required></select>
                   </div>
                   <div class="form-group col-md-2">
                     <label for="inputType">Type</label>
@@ -124,31 +148,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="text-center">
-                  <label for="visitingcard"><b>Visiting Card</b></label>
-                    <div id="visitingcardcarousel" class="carousel slide" data-ride="carousel">
-                      <div class="carousel-inner" id="visitingcardcarouselinner">
-                      </div>
-                      <a class="carousel-control-prev" href="#visitingcardcarousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="carousel-control-next" href="#visitingcardcarousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </div>
-                  <input id="visitingcard" class="btn btn-primary instantview" type="file" multiple />
-                  <input type="hidden" id="visitingcardid" value="" />
-                  <input type="hidden" id="visitingcardstring" value="" />
-                </div>
-              </div>
             </div>
-            <button id="savetransporter" class="btn btn-primary shadow-sm">
-              <i class="align-middle" data-feather="file-plus"></i>
-              Save Transporter
-            </button>
           </div>
         </div>
         <div id="addtransporterwizard" class="wizard wizard-primary mb-4">
@@ -205,6 +205,12 @@
                   @endfor
                 </div>
                 <div class="form-group col-md-1">
+                  <label for="inputArea">From Area</label>
+                  @for ($i = 1; $i <= 5; $i++)
+                  <select id="fromservicearea{{$i}}" class="form-control selectarea" multiple="multiple" required></select>
+                  @endfor
+                </div>
+                <div class="form-group col-md-1">
                   <label for="inputState">To State</label>
                   @for ($i = 1; $i <= 5; $i++)
                   <select id="toservicecitystate{{$i}}" class="form-control selectstate" required="required" placeholder="Select State"></select>
@@ -216,13 +222,19 @@
                   <select id="toservicecity{{$i}}" class="form-control selectcity" multiple="multiple" required></select>
                   @endfor
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-1">
+                  <label for="inputArea">To Area</label>
+                  @for ($i = 1; $i <= 5; $i++)
+                  <select id="toservicearea{{$i}}" class="form-control selectarea" multiple="multiple" required></select>
+                  @endfor
+                </div>
+                <div class="form-group col-md-2">
                   <label for="trucks">Trucks</label>
                   @for ($i = 1; $i <= 5; $i++)
                   <select id="truckselect{{$i}}" class="form-control truckselect" data-toggle="select2" multiple="multiple" style="width: 100%"></select>
                   @endfor
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                   <label for="commodities">Commodity</label>
                   @for ($i = 1; $i <= 5; $i++)
                   <input type="text" id="commodities{{$i}}" class="form-control" placeholder="Commodities">

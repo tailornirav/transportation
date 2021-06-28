@@ -72,16 +72,18 @@
             <table class="table table-striped" style="table-layout:fixed; width:100%">
               <thead>
                 <tr>
-                  <th style="width: 15%">From State</th>
+                  <th style="width: 10%">From State</th>
                   <th style="width: 10%">From Cities</th>
-                  <th style="width: 15%">To State</th>
+                  <th style="width: 5%">From Area</th>
+                  <th style="width: 10%">To State</th>
                   <th style="width: 10%">To Cities</th>
+                  <th style="width: 5%">To Area</th>
                   <th style="width: 40%">Trucks</th>
                   <th style="width: 20%">Commodity</th>
                 </tr>
               </thead>
               @for ($i = 1; $i <= 5; $i++)
-              <tr><td id="fromstate{{$i}}"></td><td id="fromcities{{$i}}"></td><td id="tostate{{$i}}"></td><td id="tocities{{$i}}"></td><td id="trucks{{$i}}"></td><td id="commodities{{$i}}"></td></tr>
+              <tr><td id="fromstate{{$i}}"></td><td id="fromcities{{$i}}"></td><td id="fromarea{{$i}}"></td><td id="tostate{{$i}}"></td><td id="tocities{{$i}}"></td><td id="toarea{{$i}}"></td><td id="trucks{{$i}}"></td><td id="commodities{{$i}}"></td></tr>
               @endfor
               <tbody>
               </tbody>
@@ -145,7 +147,7 @@
       <div class="card">
         <div class="card-header">
           <h5 class="card-title my-2" id="documentsheading">
-            <a href="#" data-toggle="collapse" data-target="#documents" aria-expanded="true" aria-controls="documents">Documents</a>
+            <a href="#" data-toggle="collapse" data-target="#documents" aria-expanded="true" aria-controls="documents">Business Documents</a>
           </h5>
         </div>
         <div id="documents" class="collapse" aria-labelledby="documentsheading" data-parent="#extraview">

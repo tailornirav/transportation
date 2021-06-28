@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Truck extends Model
+class Area extends Model
 {
   use HasFactory;
   use SoftDeletes;
 
-  protected $fillable = ['type', 'style', 'category', 'size', 'capacity', 'average'];
+  protected $fillable = ['city', 'area'];
 }

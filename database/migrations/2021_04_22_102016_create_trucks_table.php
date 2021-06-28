@@ -10,8 +10,9 @@ class CreateTrucksTable extends Migration{
       $table->string('type')->nullable(false);
       $table->string('style')->nullable(true);
       $table->string('category')->nullable(true);
-      $table->Integer('size')->nullable(true);
+      $table->string('size')->nullable(true);
       $table->Integer('capacity')->nullable(true);
+      $table->Integer('average')->nullable(true);
       $table->timestamps();
       $table->softDeletes();
     });

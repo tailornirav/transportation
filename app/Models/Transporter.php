@@ -135,5 +135,26 @@ class Transporter extends Model
     'tocitystring5',
     'truck5',
     'truckstring5',
-    'commodity5'];
+    'commodity5',
+    'fromarea1',
+    'fromarea2',
+    'fromarea3',
+    'fromarea4',
+    'fromarea5',
+    'fromareastring1',
+    'fromareastring2',
+    'fromareastring3',
+    'fromareastring4',
+    'fromareastring5',
+    'toarea1',
+    'toarea2',
+    'toarea3',
+    'toarea4',
+    'toarea5',
+    'toareastring1',
+    'toareastring2',
+    'toareastring3',
+    'toareastring4',
+    'toareastring5'
+  ];
 }

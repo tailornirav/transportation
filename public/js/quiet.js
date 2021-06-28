@@ -462,7 +462,22 @@ document.addEventListener("DOMContentLoaded", function() {
     },
   });
 
+  $('.areacity').each(function() {
+    $(this).multiselect({
+      enableCaseInsensitiveFiltering: true,
+      maxHeight: 200,
+      buttonWidth: '100%',
+    });
+  });
+
   $('.selectcity').each(function() {
+    $(this).multiselect({
+      enableCaseInsensitiveFiltering: true,
+      maxHeight: 200,
+      buttonWidth: '100%',
+    });
+  });
+  $('.selectarea').each(function() {
     $(this).multiselect({
       enableCaseInsensitiveFiltering: true,
       maxHeight: 200,
@@ -489,6 +504,16 @@ document.addEventListener("DOMContentLoaded", function() {
       $("#"+id.replace('state', '')).append("<option value='"+element.id+"'>"+element.city+"</option>");
     });
     $("#"+id.replace('state', '')).multiselect('rebuild');
+    $("#"+id.replace('state', '')).multiselect().trigger("change");
+  });
+
+  $(".selectcity").on('change', function() {
+    id=$(this).attr('id');
+    $("#"+id.replace('city', 'area')).empty();
+    $.each(getArea($("#"+id).val()), function(index, element){
+      $("#"+id.replace('city', 'area')).append("<option value='"+element.id+"'>"+element.area+"</option>");
+    });
+    $("#"+id.replace('city', 'area')).multiselect('rebuild');
   });
 
   if(window.location.pathname === "/admin/transporter/add" || window.location.pathname === "/admin/transporter/edit") {
@@ -507,6 +532,21 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     refreshtruckselect();
+
+    allAreas = [];
+    $.ajax({
+      type: "get",
+      url: "/api/areas/",
+      success: function(data) {
+        $.each(data, function(index, element){
+          allAreas.push(element);
+        });
+      }
+    });
+
+    function getArea(city) {
+      return allAreas.filter(item => city.includes(item.city));
+    }
   }
 
   function refreshtruckselect() {
@@ -757,6 +797,26 @@ document.addEventListener("DOMContentLoaded", function() {
     formData.append("tocitystring3", $("#toservicecity3 option:selected").toArray().map(item => item.text).join(';'));
     formData.append("tocitystring4", $("#toservicecity4 option:selected").toArray().map(item => item.text).join(';'));
     formData.append("tocitystring5", $("#toservicecity5 option:selected").toArray().map(item => item.text).join(';'));
+    formData.append("fromarea1", $("#fromservicearea1").val().join(";"));
+    formData.append("fromarea2", $("#fromservicearea2").val().join(";"));
+    formData.append("fromarea3", $("#fromservicearea3").val().join(";"));
+    formData.append("fromarea4", $("#fromservicearea4").val().join(";"));
+    formData.append("fromarea5", $("#fromservicearea5").val().join(";"));
+    formData.append("fromareastring1", $("#fromservicearea1 option:selected").toArray().map(item => item.text).join(';'));
+    formData.append("fromareastring2", $("#fromservicearea2 option:selected").toArray().map(item => item.text).join(';'));
+    formData.append("fromareastring3", $("#fromservicearea3 option:selected").toArray().map(item => item.text).join(';'));
+    formData.append("fromareastring4", $("#fromservicearea4 option:selected").toArray().map(item => item.text).join(';'));
+    formData.append("fromareastring5", $("#fromservicearea5 option:selected").toArray().map(item => item.text).join(';'));
+    formData.append("toarea1", $("#toservicearea1").val().join(";"));
+    formData.append("toarea2", $("#toservicearea2").val().join(";"));
+    formData.append("toarea3", $("#toservicearea3").val().join(";"));
+    formData.append("toarea4", $("#toservicearea4").val().join(";"));
+    formData.append("toarea5", $("#toservicearea5").val().join(";"));
+    formData.append("toareastring1", $("#toservicearea1 option:selected").toArray().map(item => item.text).join(';'));
+    formData.append("toareastring2", $("#toservicearea2 option:selected").toArray().map(item => item.text).join(';'));
+    formData.append("toareastring3", $("#toservicearea3 option:selected").toArray().map(item => item.text).join(';'));
+    formData.append("toareastring4", $("#toservicearea4 option:selected").toArray().map(item => item.text).join(';'));
+    formData.append("toareastring5", $("#toservicearea5 option:selected").toArray().map(item => item.text).join(';'));
     formData.append("truck1", $("#truckselect1").val().join(";"));
     formData.append("truck2", $("#truckselect2").val().join(";"));
     formData.append("truck3", $("#truckselect3").val().join(";"));
@@ -859,6 +919,11 @@ document.addEventListener("DOMContentLoaded", function() {
         data.fromcitystring3 ? $("#fromcities3").append(data.fromcitystring3.split(";").join("<br>")) : null;
         data.fromcitystring4 ? $("#fromcities4").append(data.fromcitystring4.split(";").join("<br>")) : null;
         data.fromcitystring5 ? $("#fromcities5").append(data.fromcitystring5.split(";").join("<br>")) : null;
+        data.fromareastring1 ? $("#fromarea1").append(data.fromareastring1.split(";").join("<br>")) : null;
+        data.fromareastring2 ? $("#fromarea2").append(data.fromareastring2.split(";").join("<br>")) : null;
+        data.fromareastring3 ? $("#fromarea3").append(data.fromareastring3.split(";").join("<br>")) : null;
+        data.fromareastring4 ? $("#fromarea4").append(data.fromareastring4.split(";").join("<br>")) : null;
+        data.fromareastring5 ? $("#fromarea5").append(data.fromareastring5.split(";").join("<br>")) : null;
         $("#tostate1").append(data.tostatestring1);
         $("#tostate2").append(data.tostatestring2);
         $("#tostate3").append(data.tostatestring3);
@@ -869,6 +934,11 @@ document.addEventListener("DOMContentLoaded", function() {
         data.tocitystring3 ? $("#tocities3").append(data.tocitystring3.split(";").join("<br>")) : null;
         data.tocitystring4 ? $("#tocities4").append(data.tocitystring4.split(";").join("<br>")) : null;
         data.tocitystring5 ? $("#tocities5").append(data.tocitystring5.split(";").join("<br>")) : null;
+        data.toareastring1 ? $("#toarea1").append(data.toareastring1.split(";").join("<br>")) : null;
+        data.toareastring2 ? $("#toarea2").append(data.toareastring2.split(";").join("<br>")) : null;
+        data.toareastring3 ? $("#toarea3").append(data.toareastring3.split(";").join("<br>")) : null;
+        data.toareastring4 ? $("#toarea4").append(data.toareastring4.split(";").join("<br>")) : null;
+        data.toareastring5 ? $("#toarea5").append(data.toareastring5.split(";").join("<br>")) : null;
         data.truckstring1 ? $("#trucks1").append(data.truckstring1.split(";").join("<br>")) : null;
         data.truckstring2 ? $("#trucks2").append(data.truckstring2.split(";").join("<br>")) : null;
         data.truckstring3 ? $("#trucks3").append(data.truckstring3.split(";").join("<br>")) : null;
@@ -982,21 +1052,31 @@ document.addEventListener("DOMContentLoaded", function() {
         $("#fromservicecitystate3").val(data.fromstate3).trigger('change');
         $("#fromservicecitystate4").val(data.fromstate4).trigger('change');
         $("#fromservicecitystate5").val(data.fromstate5).trigger('change');
-        data.fromcity1 ? $("#fromservicecity1").multiselect('select', data.fromcity1.split(";")) : null;
-        data.fromcity2 ? $("#fromservicecity2").multiselect('select', data.fromcity2.split(";")) : null;
-        data.fromcity3 ? $("#fromservicecity3").multiselect('select', data.fromcity3.split(";")) : null;
-        data.fromcity4 ? $("#fromservicecity4").multiselect('select', data.fromcity4.split(";")) : null;
-        data.fromcity5 ? $("#fromservicecity5").multiselect('select', data.fromcity5.split(";")) : null;
+        data.fromcity1 ? $("#fromservicecity1").multiselect('select', data.fromcity1.split(";")).trigger('change') : null;
+        data.fromcity2 ? $("#fromservicecity2").multiselect('select', data.fromcity2.split(";")).trigger('change') : null;
+        data.fromcity3 ? $("#fromservicecity3").multiselect('select', data.fromcity3.split(";")).trigger('change') : null;
+        data.fromcity4 ? $("#fromservicecity4").multiselect('select', data.fromcity4.split(";")).trigger('change') : null;
+        data.fromcity5 ? $("#fromservicecity5").multiselect('select', data.fromcity5.split(";")).trigger('change') : null;
+        data.fromarea1 ? $("#fromservicearea1").multiselect('select', data.fromarea1.split(";")) : null;
+        data.fromarea2 ? $("#fromservicearea2").multiselect('select', data.fromarea2.split(";")) : null;
+        data.fromarea3 ? $("#fromservicearea3").multiselect('select', data.fromarea3.split(";")) : null;
+        data.fromarea4 ? $("#fromservicearea4").multiselect('select', data.fromarea4.split(";")) : null;
+        data.fromarea5 ? $("#fromservicearea5").multiselect('select', data.fromarea5.split(";")) : null;
         $("#toservicecitystate1").val(data.tostate1).trigger('change');
         $("#toservicecitystate2").val(data.tostate2).trigger('change');
         $("#toservicecitystate3").val(data.tostate3).trigger('change');
         $("#toservicecitystate4").val(data.tostate4).trigger('change');
         $("#toservicecitystate5").val(data.tostate5).trigger('change');
-        data.tocity1 ? $("#toservicecity1").multiselect('select', data.tocity1.split(";")) : null;
-        data.tocity2 ? $("#toservicecity2").multiselect('select', data.tocity2.split(";")) : null;
-        data.tocity3 ? $("#toservicecity3").multiselect('select', data.tocity3.split(";")) : null;
-        data.tocity4 ? $("#toservicecity4").multiselect('select', data.tocity4.split(";")) : null;
-        data.tocity5 ? $("#toservicecity5").multiselect('select', data.tocity5.split(";")) : null;
+        data.tocity1 ? $("#toservicecity1").multiselect('select', data.tocity1.split(";")).trigger('change') : null;
+        data.tocity2 ? $("#toservicecity2").multiselect('select', data.tocity2.split(";")).trigger('change') : null;
+        data.tocity3 ? $("#toservicecity3").multiselect('select', data.tocity3.split(";")).trigger('change') : null;
+        data.tocity4 ? $("#toservicecity4").multiselect('select', data.tocity4.split(";")).trigger('change') : null;
+        data.tocity5 ? $("#toservicecity5").multiselect('select', data.tocity5.split(";")).trigger('change') : null;
+        data.toarea1 ? $("#toservicearea1").multiselect('select', data.toarea1.split(";")) : null;
+        data.toarea2 ? $("#toservicearea2").multiselect('select', data.toarea2.split(";")) : null;
+        data.toarea3 ? $("#toservicearea3").multiselect('select', data.toarea3.split(";")) : null;
+        data.toarea4 ? $("#toservicearea4").multiselect('select', data.toarea4.split(";")) : null;
+        data.toarea5 ? $("#toservicearea5").multiselect('select', data.toarea5.split(";")) : null;
         data.truck1 ? $("#truckselect1").multiselect('select', data.truck1.split(";")) : null;
         data.truck2 ? $("#truckselect2").multiselect('select', data.truck2.split(";")) : null;
         data.truck3 ? $("#truckselect3").multiselect('select', data.truck3.split(";")) : null;
@@ -1019,6 +1099,8 @@ document.addEventListener("DOMContentLoaded", function() {
           });
         }
       }
+    }).then(function (){
+
     });
   }
 
@@ -1063,18 +1145,6 @@ document.addEventListener("DOMContentLoaded", function() {
       $('#trucktype').removeClass('is-invalid');
     }
 
-    if($('#trucksize').val() !== "") {
-      if(isNaN($('#trucksize').val())){
-        invaliddatatype += "<li><b>Truck Size</b> should be integer(e.g., 1642).";
-        $('#trucksize').addClass('is-invalid');
-        dataiscorrect = false;
-      } else {
-        $('#trucksize').removeClass('is-invalid');
-      }
-    } else {
-      $('#trucksize').removeClass('is-invalid');
-    }
-
     if($('#truckcapacity').val() !== "") {
       if(isNaN($('#truckcapacity').val())){
         invaliddatatype += "<li><b>Truck Capacity</b> should be integer(e.g., 1642).";
@@ -1108,7 +1178,8 @@ document.addEventListener("DOMContentLoaded", function() {
   //Adding truck to database
   /* ----------------------------------------------------------------------------- */
 
-  $("#addtrucktodatabase").click(function() {
+
+  $("#savetruck").click(function() {
     event.preventDefault();
 
     if(!truckvalidation()) {
@@ -1116,17 +1187,23 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     var formData = new FormData();
+
+    if($("#truckid").val() !== "") {
+      formData.append("_method", "PUT");
+    }
+
     formData.append("type", $('#trucktype').val());
     formData.append("style", $('#truckstyle').val());
     formData.append("category", $('#truckcategory').val());
     formData.append("size", $('#trucksize').val());
     formData.append("capacity", $('#truckcapacity').val());
+    formData.append(" average", $('#truckaverage').val());
 
     var notyf = new Notyf();
 
     $.ajax({
       type: "post",
-      url: '/api/trucks',
+      url: $("#truckid").val() !== "" ? '/api/trucks/'+$("#truckid").val() : '/api/trucks',
       data: formData,
       cache: false,
       contentType: false,
@@ -1141,79 +1218,6 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       error: function() {
         notyf.error('Error occured!! Your change is not saved.');
-      }
-    });
-    $('#truckcollapse').collapse('toggle');
-  });
-
-  /* ----------------------------------------------------------------------------- */
-  //END
-  /* ----------------------------------------------------------------------------- */
-
-  /* ----------------------------------------------------------------------------- */
-  //Edit truck to database
-  /* ----------------------------------------------------------------------------- */
-
-  $("#edittrucktodatabase").click(function() {
-    event.preventDefault();
-
-    if(!truckvalidation()) {
-      return false;
-    }
-
-    var formData = new FormData();
-    formData.append("_method", "PUT");
-    formData.append("type", $('#trucktype').val());
-    formData.append("style", $('#truckstyle').val());
-    formData.append("category", $('#truckcategory').val());
-    formData.append("size", $('#trucksize').val());
-    formData.append("capacity", $('#truckcapacity').val());
-
-    var notyf = new Notyf();
-
-    $.ajax({
-      type: 'post',
-      url: '/api/trucks/'+$('#truckid').val(),
-      data: formData,
-      dataType: 'json',
-      cache: false,
-      contentType: false,
-      processData: false,
-      success: function() {
-        notyf.success('Your changes have been successfully saved!');
-      },
-      error: function() {
-        notyf.error('Error occured!! Your change is not saved.');
-      }
-    });
-
-    $('#truckcollapse').collapse('toggle');
-    $('#truckentirecard').addClass('d-none');
-
-    refreshtrucktable();
-  });
-
-  /* ----------------------------------------------------------------------------- */
-  //Edit truck to database
-  /* ----------------------------------------------------------------------------- */
-
-  /* ----------------------------------------------------------------------------- */
-  // Delete Truck
-  /* ----------------------------------------------------------------------------- */
-
-  $("#deletetruckconfirm").click(function(){
-    $.ajax({
-      type: "delete",
-      url: '/api/trucks/'+$('#truckid').val(),
-      cache: false,
-      contentType: false,
-      processData: false,
-      success: function() {
-        var notyf = new Notyf();
-        notyf.success('Your truck type has been deleted successfully.');
-
-        $('#deletetruckmodal').modal('toggle');
-        $('#truckentirecard').addClass('d-none');
       }
     });
     refreshtrucktable();
@@ -1240,46 +1244,89 @@ document.addEventListener("DOMContentLoaded", function() {
         $("#datatablestrucks tbody").empty();
 
         $.each(data, function(index, element){
-          $("#datatablestrucks tbody").append("<tr id='"+element.id+"'><td>"+element.type+"</td><td>"+element.style+"</td><td>"+element.category+"</td><td>"+element.size+"</td><td>"+element.capacity+"</td></tr>");
+          $("#datatablestrucks tbody").append("<tr id='"+element.id+"'><td>"+element.type+"</td><td>"+element.style+"</td><td>"+element.category+"</td><td>"+element.size+"</td><td>"+element.capacity+"</td><td>"+element.average+"</td><td class='table-action'><a onclick='(function() {$.ajax({type: \"get\", url: \"/api/trucks/"+element.id+"\", success: function(data) { $(\"#truckid\").val(\"\"); $(\"#truckid\").val(data.id); $(\"#trucktype\").val(data.type); $(\"#truckstyle\").val(data.style); $(\"#truckcategory\").val(data.category); $(\"#trucksize\").val(data.size); $(\"#truckcapacity\").val(data.capacity); $(\"#truckaverage\").val(data.average); }});}) ();'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit-2 align-middle'><path d='M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'></path></svg></a><a onclick='(function() {$.ajax({type: \"delete\", url: \"/api/trucks/"+element.id+"\"}); location.reload(); }) ();'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-trash align-middle'><polyline points='3 6 5 6 21 6'></polyline><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path></svg></a></td></tr>");
         });
 
         $('#datatablestrucks').DataTable({
           "pageLength": 25
         }).draw();
       },
-    }).done(function() {
-      $("#datatablestrucks tbody tr").click(function() {
-        $.ajax({
-          type: "get",
-          url: '/api/trucks/'+$(this).attr('id'),
-          cache: false,
-          contentType: false,
-          processData: false,
-          success: function(data) {
-            $('#truckid').val('');
-            $('#trucktypestyle').empty();
-            $("#truckviewcard tbody").empty();
-
-            $('#truckentirecard').removeClass('d-none');
-            $('#truckcollapse').collapse("hide");
-
-            $('#truckid').val(data.id);
-            $('#trucktypestyle').append(data.type + ' ' + data.style);
-            $("#truckviewcard tbody").append("<tr><th>Type</th><td>"+data.type+"</td></tr><tr><th>Style</th><td>"+data.style+"</td></tr><tr><th>Category</th><td>"+data.category+"</td></tr><tr><th>Size</th><td>"+data.size+"</td></tr><tr><th>Capacity</th><td>"+data.capacity+"</td></tr>");
-
-            $("#trucktype").val(data.type);
-            $("#truckstyle").val(data.style);
-            $("#truckcategory").val(data.category);
-            $("#trucksize").val(data.size);
-            $("#truckcapacity").val(data.capacity);
-          },
-        })
-      })
-    })
+    });
   }
 
   window.location.pathname === "/admin/truck/index" ? refreshtrucktable() : null;
 
+  /* ----------------------------------------------------------------------------- */
+  // END
+  /* ----------------------------------------------------------------------------- */
+
+  /* ----------------------------------------------------------------------------- */
+  // Area
+  /* ----------------------------------------------------------------------------- */
+  if(window.location.pathname === "/admin/area/index") {
+
+    function getCity(state) {
+      return allCities.filter(item => item.state == state);
+    }
+
+    $(".selectstate").empty();
+    $(".selectstate").append("<option disabled selected></option>");
+
+    $.each(allStates, function(index, element){
+      $(".selectstate").append("<option value='"+element.id+"'>"+element.state+"</option>");
+    });
+
+    refreshareatable();
+  }
+
+  function refreshareatable() {
+    $.ajax({
+      type: "get",
+      url: '/api/areas',
+      datatype: 'json',
+      success: function(data) {
+        $("#areatable").DataTable().destroy();
+        $("#areatable tbody").empty();
+
+        $.each(data, function(index, element){
+          $("#areatable tbody").append("<tr><td>"+allStates[allCities[element.city - 1].state - 1].state+"</td><td>"+allCities[element.city - 1].city+"</td><td>"+element.area+"</td><td><a onclick='(function() {$.ajax({type: \"delete\", url: \"/api/areas/"+element.id+"\"}); location.reload(); }) ();'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-trash align-middle'><polyline points='3 6 5 6 21 6'></polyline><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path></svg></a></td></tr>");
+        });
+
+        $('#areatable').DataTable({
+          "pageLength": 25
+        }).draw();
+      },
+    });
+  }
+
+  $("#savearea").click(function() {
+    event.preventDefault();
+
+    var formData = new FormData();
+
+    formData.append("city", $('#areacity').val());
+    formData.append("area", $('#area').val());
+
+    var notyf = new Notyf();
+
+    $.ajax({
+      type: "post",
+      url: '/api/areas',
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function() {
+        $('#city').val("");
+        $('#area').val("");
+        notyf.success('Your changes have been successfully saved!');
+        refreshareatable();
+      },
+      error: function() {
+        notyf.error('Error occured!! Your change is not saved.');
+      }
+    });
+  });
   /* ----------------------------------------------------------------------------- */
   // END
   /* ----------------------------------------------------------------------------- */

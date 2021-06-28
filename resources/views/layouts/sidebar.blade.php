@@ -76,14 +76,16 @@
       	Management
       </li>
       <li class="sidebar-item">
-      	<a href="#trucks" data-toggle="collapse" class="sidebar-link collapsed">
+      	<a href="/admin/truck/index" class="sidebar-link collapsed">
           <span class="iconify" data-icon="bi:truck" data-inline="false" style="color: #495057;"></span>
           <span class="align-middle">Truck</span>
         </a>
-      	<ul id="trucks" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
-      		<li class="sidebar-item"><a class="sidebar-link" href="/admin/truck/index">Truck List </a></li>
-      		<li class="sidebar-item"><a class="sidebar-link" href="/admin/truck/add">Add Truck</a></li>
-      	</ul>
+      </li>
+      <li class="sidebar-item">
+      	<a href="/admin/area/index" class="sidebar-link collapsed">
+          <span class="iconify" data-icon="mdi:google-maps" data-inline="false" style="color: #495057;"></span>
+          <span class="align-middle">Area</span>
+        </a>
       </li>
       <li class="sidebar-item">
       	<a href="#vehicles" data-toggle="collapse" class="sidebar-link collapsed">
