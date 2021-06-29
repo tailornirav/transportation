@@ -160,30 +160,24 @@
           <div class="tab-content" style="overflow:visible">
             <div id="contact" class="tab-pane" role="tabpanel">
               <div class="form-row">
+                @for ($i = 1; $i <= 4; $i++)
                 <div class="form-group col-md-3">
                   <label for="multiplename">Name of the Person</label>
-                  @for ($i = 1; $i <= 4; $i++)
                   <input type="text" class="form-control" id="multiplename{{$i}}" placeholder="Name">
-                  @endfor
                 </div>
                 <div class="form-group col-md-3">
                   <label for="multiplecontact">Contact Number 1</label>
-                  @for ($i = 1; $i <= 4; $i++)
                   <input type="tel" class="form-control" id="multiplecontact1{{$i}}" placeholder="Mobile" pattern="[6-9]{1}[0-9]{9}">
-                  @endfor
                 </div>
                 <div class="form-group col-md-3">
                   <label for="multiplecontact">Contact Number 2</label>
-                  @for ($i = 1; $i <= 4; $i++)
                   <input type="tel" class="form-control" id="multiplecontact2{{$i}}" placeholder="Mobile" pattern="[6-9]{1}[0-9]{9}">
-                  @endfor
                 </div>
                 <div class="form-group col-md-3">
                   <label for="multiplewhatsapp">What's App Mobile Number</label>
-                  @for ($i = 1; $i <= 4; $i++)
                   <input type="tel" class="form-control" id="multiplewhatsappmobile{{$i}}" placeholder="What's App" pattern="[6-9]{1}[0-9]{9}">
-                  @endfor
                 </div>
+                @endfor
               </div>
               <button id="savecontacts" class="btn btn-primary shadow-sm">
                 <i class="align-middle" data-feather="file-plus"></i>
@@ -192,54 +186,40 @@
             </div>
             <div id="service" class="tab-pane" role="tabpanel">
               <div class="form-row">
+                @for ($i = 1; $i <= 5; $i++)
                 <div class="form-group col-md-1">
                   <label for="inputState">From State</label>
-                  @for ($i = 1; $i <= 5; $i++)
                   <select id="fromservicecitystate{{$i}}" class="form-control selectstate" required="required"></select>
-                  @endfor
                 </div>
                 <div class="form-group col-md-2">
                   <label for="inputCity">From City</label>
-                  @for ($i = 1; $i <= 5; $i++)
                   <select id="fromservicecity{{$i}}" class="form-control selectcity" multiple="multiple" required></select>
-                  @endfor
                 </div>
                 <div class="form-group col-md-1">
                   <label for="inputArea">From Area</label>
-                  @for ($i = 1; $i <= 5; $i++)
                   <select id="fromservicearea{{$i}}" class="form-control selectarea" multiple="multiple" required></select>
-                  @endfor
                 </div>
                 <div class="form-group col-md-1">
                   <label for="inputState">To State</label>
-                  @for ($i = 1; $i <= 5; $i++)
                   <select id="toservicecitystate{{$i}}" class="form-control selectstate" required="required" placeholder="Select State"></select>
-                  @endfor
                 </div>
                 <div class="form-group col-md-2">
                   <label for="inputCity">To City</label>
-                  @for ($i = 1; $i <= 5; $i++)
                   <select id="toservicecity{{$i}}" class="form-control selectcity" multiple="multiple" required></select>
-                  @endfor
                 </div>
                 <div class="form-group col-md-1">
                   <label for="inputArea">To Area</label>
-                  @for ($i = 1; $i <= 5; $i++)
                   <select id="toservicearea{{$i}}" class="form-control selectarea" multiple="multiple" required></select>
-                  @endfor
                 </div>
                 <div class="form-group col-md-2">
                   <label for="trucks">Trucks</label>
-                  @for ($i = 1; $i <= 5; $i++)
                   <select id="truckselect{{$i}}" class="form-control truckselect" data-toggle="select2" multiple="multiple" style="width: 100%"></select>
-                  @endfor
                 </div>
                 <div class="form-group col-md-2">
                   <label for="commodities">Commodity</label>
-                  @for ($i = 1; $i <= 5; $i++)
                   <input type="text" id="commodities{{$i}}" class="form-control" placeholder="Commodities">
-                  @endfor
                 </div>
+                @endfor
               </div>
               <button id="saveservices" class="btn btn-primary shadow-sm">
                 <i class="align-middle" data-feather="file-plus"></i>
@@ -248,36 +228,28 @@
             </div>
             <div id="bank" class="tab-pane" role="tabpanel">
               <div class="form-row">
+                @for ($i = 1; $i <= 3; $i++)
                 <div class="form-group col-md-3">
                   <label for="bankholdername">Account Holder Name</label>
-                  @for ($i = 1; $i <= 3; $i++)
                   <input type="text" class="form-control" id="bankholdername{{$i}}" placeholder="Holder Name">
-                  @endfor
                 </div>
                 <div class="form-group col-md-3">
                   <label for="accountnumber">Account Number</label>
-                  @for ($i = 1; $i <= 3; $i++)
                   <input type="text" class="form-control" id="accountnumber{{$i}}" placeholder="Account Number">
-                  @endfor
                 </div>
                 <div class="form-group col-md-2">
                   <label for="bankname">Bank Name</label>
-                  @for ($i = 1; $i <= 3; $i++)
                   <input type="text" class="form-control" id="bankname{{$i}}" placeholder="Name">
-                  @endfor
                 </div>
                 <div class="form-group col-md-2">
                   <label for="bankbranch">Bank's Branch</label>
-                  @for ($i = 1; $i <= 3; $i++)
                   <input type="text" class="form-control" id="bankbranch{{$i}}" placeholder="Branch">
-                  @endfor
                 </div>
                 <div class="form-group col-md-2">
                   <label for="ifsccode">IFSC Code</label>
-                  @for ($i = 1; $i <= 3; $i++)
                   <input type="text" class="form-control" id="ifsccode{{$i}}" placeholder="IFSC">
-                  @endfor
                 </div>
+                @endfor
               </div>
               <button id="savebanks" class="btn btn-primary shadow-sm">
                 <i class="align-middle" data-feather="file-plus"></i>
